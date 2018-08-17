@@ -1,0 +1,61 @@
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="javascript/test_ruler.js"></script>
+<style>
+body {
+  margin: 20px 200px;
+}
+p {
+  font-family: verdana;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: justify;
+}
+.cont {
+  width: 500px;
+  height: 150px;
+  border: 1px solid red;
+  margin: 0 0 10px 0;
+}
+#input_values {
+}
+#ruler_svg {
+  background-color: cyan;
+}
+</style>
+</head>
+<body>
+  <input id="input_values" type="text" onchange="scaleRuler(this)" />
+  <div class="cont">
+  </div>
+  <div class="cont">
+    <svg id="ruler_svg" x="0" y="0" widthnom="217" width="217" height="26" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="font-size: 18px; font-family: monospace">
+        <g fill="none" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" text-anchor="start" mix-blend-mode="normal" />
+        <g id="1in" fill="#000000" stroke="#000000" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" mix-blend-mode="normal">
+            <line xnom="0" ynom="" x1="0" y1="0" x2="0" y2="24" id="1in_tick_0" />
+            <text xnom="69" ynom="" x="69" y="23" id="1in_label_1" text-anchor="end">1</text>
+            <line xnom="72" ynom="" x1="72" y1="0" x2="72" y2="24" id="1in_tick_1" />
+            <text xnom="141" ynom="" x="141" y="23" id="1in_label_2" text-anchor="end">2</text>
+            <line xnom="144" ynom="" x1="147" y1="0" x2="147" y2="24" id="1in_tick_2" />
+            <text xnom="213" ynom="" x="213" y="23" id="1in_label_3" text-anchor="end">3</text>
+            <line xnom="216" ynom="" x1="216" y1="0" x2="216" y2="24" id="1in_tick_3" />
+        </g>
+        <g id="1_2in" fill="none" stroke="#000000" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" text-anchor="start" mix-blend-mode="normal">
+            <line xnom="36" ynom="" x1="36" y1="0" x2="36" y2="18" id="1-2in_tick_1" />
+            <line xnom="108" ynom="" x1="108" y1="0" x2="108" y2="18" id="1-2in_tick_3" />
+            <line xnom="180" ynom="" x1="180" y1="0" x2="180" y2="18" id="1-2in_tick_5" />
+        </g>
+        <g id="1_4in" fill="none" stroke="#000000" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" text-anchor="start" mix-blend-mode="normal" y1="0" y2="10">
+            <line xnom="18" ynom="" x1="18" y1="0" x2="18" y2="10" id="1-4in_tick_1" />
+            <line xnom="54" ynom="" x1="54" y1="0" x2="54" y2="10" id="1-4in_tick_3" />
+            <line xnom="90" ynom="" x1="90" y1="0" x2="90" y2="10" id="1-4in_tick_5" />
+            <line xnom="126" ynom="" x1="126" y1="0" x2="126" y2="10" id="1-4in_tick_7" />
+            <line xnom="162" ynom="" x1="162" y1="0" x2="162" y2="10" id="1-4in_tick_9" />
+            <line xnom="198" ynom="" x1="198" y1="0" x2="198" y2="10" id="1-4in_tick_11" />
+        </g>
+    </svg>
+  </div>
+</body>
+</html>

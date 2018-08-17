@@ -1,0 +1,26 @@
+<svg x="0" y="0" width="217" height="185" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="font-size: 18px; font-family: monospace">
+    <g fill="none" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" text-anchor="start" mix-blend-mode="normal" />
+    <g id="1 &quot;in. Tick Group" fill="#000000" stroke="#000000" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" mix-blend-mode="normal">
+        <line x1="0" y1="0" x2="0" y2="108" id="1in_tick_0" />
+        <text x="69" y="103" id="1in_label_1" text-anchor="end">1</text>
+        <line x1="72" y1="0" x2="72" y2="108" id="1in_tick_1" />
+        <text x="141" y="103" id="1in_label_2" text-anchor="end">2</text>
+        <line x1="144" y1="0" x2="144" y2="108" id="1in_tick_2" />
+        <text x="213" y="103" id="1in_label_3" text-anchor="end">3</text>
+        <line x1="216" y1="0" x2="216" y2="108" id="1in_tick_3" />
+    </g>
+    <g id="1/2 &quot;in. Tick Group" fill="none" stroke="#000000" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" text-anchor="start" mix-blend-mode="normal">
+        <line x1="36" y1="0" x2="36" y2="54" id="1-2in_tick_1" />
+        <line x1="108" y1="0" x2="108" y2="54" id="1-2in_tick_3" />
+        <line x1="180" y1="0" x2="180" y2="54" id="1-2in_tick_5" />
+    </g>
+    <g id="1/4 &quot;in. Tick Group" fill="none" stroke="#000000" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" text-anchor="start" mix-blend-mode="normal">
+        <line x1="18" y1="0" x2="18" y2="27" id="1-4in_tick_1" />
+        <line x1="54" y1="0" x2="54" y2="27" id="1-4in_tick_3" />
+        <line x1="90" y1="0" x2="90" y2="27" id="1-4in_tick_5" />
+        <line x1="126" y1="0" x2="126" y2="27" id="1-4in_tick_7" />
+        <line x1="162" y1="0" x2="162" y2="27" id="1-4in_tick_9" />
+        <line x1="198" y1="0" x2="198" y2="27" id="1-4in_tick_11" />
+    </g>
+</svg>
+

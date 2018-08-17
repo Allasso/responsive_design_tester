@@ -1,0 +1,250 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+@media screen and (min-width: 1px) {
+  #testareamediasizefeedback { opacity: .005; }
+}
+@media screen and (min-width: 100px) {
+  #testareamediasizefeedback { opacity: .100; }
+}
+@media screen and (min-width: 125px) {
+  #testareamediasizefeedback { opacity: .125; }
+}
+@media screen and (min-width: 150px) {
+  #testareamediasizefeedback { opacity: .150; }
+}
+@media screen and (min-width: 175px) {
+  #testareamediasizefeedback { opacity: .175; }
+}
+@media screen and (min-width: 200px) {
+  #testareamediasizefeedback { opacity: .200; }
+}
+@media screen and (min-width: 225px) {
+  #testareamediasizefeedback { opacity: .225; }
+}
+@media screen and (min-width: 250px) {
+  #testareamediasizefeedback { opacity: .250; }
+}
+@media screen and (min-width: 275px) {
+  #testareamediasizefeedback { opacity: .275; }
+}
+@media screen and (min-width: 300px) {
+  #testareamediasizefeedback { opacity: .300; }
+}
+@media screen and (min-width: 325px) {
+  #testareamediasizefeedback { opacity: .325; }
+}
+@media screen and (min-width: 350px) {
+  #testareamediasizefeedback { opacity: .350; }
+}
+@media screen and (min-width: 375px) {
+  #testareamediasizefeedback { opacity: .375; }
+}
+@media screen and (min-width: 400px) {
+  #testareamediasizefeedback { opacity: .400; }
+}
+@media screen and (min-width: 425px) {
+  #testareamediasizefeedback { opacity: .425; }
+}
+@media screen and (min-width: 450px) {
+  #testareamediasizefeedback { opacity: .450; }
+}
+@media screen and (min-width: 475px) {
+  #testareamediasizefeedback { opacity: .475; }
+}
+@media screen and (min-width: 500px) {
+  #testareamediasizefeedback { opacity: .500; }
+}
+@media screen and (min-width: 525px) {
+  #testareamediasizefeedback { opacity: .525; }
+}
+@media screen and (min-width: 550px) {
+  #testareamediasizefeedback { opacity: .550; }
+}
+@media screen and (min-width: 575px) {
+  #testareamediasizefeedback { opacity: .575; }
+}
+@media screen and (min-width: 600px) {
+  #testareamediasizefeedback { opacity: .600; }
+}
+@media screen and (min-width: 625px) {
+  #testareamediasizefeedback { opacity: .625; }
+}
+@media screen and (min-width: 650px) {
+  #testareamediasizefeedback { opacity: .650; }
+}
+@media screen and (min-width: 675px) {
+  #testareamediasizefeedback { opacity: .675; }
+}
+@media screen and (min-width: 700px) {
+  #testareamediasizefeedback { opacity: .700; }
+}
+@media screen and (min-width: 725px) {
+  #testareamediasizefeedback { opacity: .725; }
+}
+@media screen and (min-width: 750px) {
+  #testareamediasizefeedback { opacity: .750; }
+}
+@media screen and (min-width: 775px) {
+  #testareamediasizefeedback { opacity: .775; }
+}
+@media screen and (min-width: 800px) {
+  #testareamediasizefeedback { opacity: .800; }
+}
+@media screen and (min-width: 825px) {
+  #testareamediasizefeedback { opacity: .825; }
+}
+@media screen and (min-width: 850px) {
+  #testareamediasizefeedback { opacity: .850; }
+}
+@media screen and (min-width: 875px) {
+  #testareamediasizefeedback { opacity: .875; }
+}
+@media screen and (min-width: 900px) {
+  #testareamediasizefeedback { opacity: .900; }
+}
+@media screen and (min-width: 925px) {
+  #testareamediasizefeedback { opacity: .925; }
+}
+@media screen and (min-width: 950px) {
+  #testareamediasizefeedback { opacity: .950; }
+}
+@media screen and (min-width: 975px) {
+  #testareamediasizefeedback { opacity: .975; }
+}
+@media screen and (min-width: 1000px) {
+  #testareamediasizefeedback { opacity: 1.000; }
+}
+
+body {
+  margin: 10px 0 0 0;
+}
+p {
+  font-family: verdana;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: justify;
+}
+
+#textarea {
+  width: 150px;
+  height: 175px;
+}
+#text_evaluator {
+  width: 100%;
+  font-size: 10px;
+}
+#testareamediasizefeedback {
+  background-color: #dfd;
+  width: 100px;
+  height: 10px;
+}
+</style>
+</head>
+<body>
+<textarea id="textarea">
+</textarea>
+<p id="text_evaluator">
+</p>
+<div id="testareamediasizefeedback">
+</div>
+<script>
+  function evaluateText() {
+    var textString = " had three children over the next seven years. When he was 25 years old, while fasting and in prayer, he heard the voice of God command him three times to leave his Sunday-keeping church and then he heard God command him once to keep the seventh-day Sabbath.";
+
+    var textarea = document.getElementById("textarea");
+    textarea.value = "";
+
+    //textarea.value += navigator.userAgent + "\n";
+
+    // 96 css pixels per inch. ??????
+    //var widthInInches = window.screen.width / (96 * window.devicePixelRatio)
+    //textarea.value = window.screen.width + "\n" + window.devicePixelRatio + "\n" + widthInInches;
+    textarea.value += window.screen.width + "\n" + window.innerWidth + "\n";
+
+    var mediaFeedback = document.getElementById("testareamediasizefeedback");
+    var opacity = window.getComputedStyle(mediaFeedback).getPropertyValue("opacity");
+    textarea.value += "@media: " + parseInt(opacity * 1000) + "\n";
+
+    var text_evaluator = document.getElementById("text_evaluator");
+    text_evaluator.textContent = "He";
+    var compareHeight = text_evaluator.getBoundingClientRect().height;
+
+  //textarea.value += "cmprHt : " + compareHeight + "\n";
+
+    for (var i = 0; i < 30; i++) {
+      text_evaluator.textContent += textString;
+    }
+
+    var newHeight = text_evaluator.getBoundingClientRect().height;
+    var linesCount = parseInt(newHeight / compareHeight);
+
+  textarea.value += "cm: " + compareHeight + " nw: " + newHeight + " ct: " + linesCount + "\n";
+
+    for (var i = 0; i < textString.length; i ++) {
+      text_evaluator.textContent += textString[i];
+      var height = text_evaluator.getBoundingClientRect().height;
+      // We just broke to another line
+      if (newHeight != height) {
+        break;
+      }
+    }
+
+    var resultingString = text_evaluator.textContent;
+  var rS1 = resultingString;
+    resultingString = resultingString.replace(/[ -][\w,.]*$/, "");
+    var aveCharsPerLine = resultingString.length / linesCount;
+    var targetFontSize = 10 * aveCharsPerLine / 35.85;
+  textarea.value += "cpl " + aveCharsPerLine + " fs " + targetFontSize + "px\n";
+
+    text_evaluator.textContent = "He had three children over the next seven years. When he was 25 years old, while fasting and in prayer,";
+    text_evaluator.style.fontSize = targetFontSize + "px";
+
+    return targetFontSize;
+
+    /*
+  var messageString = "";
+    var currentHeight;
+    var heightIncreaseCount = 0;
+    var charCount = 0;
+
+    for (var i = 1; i < textString.length; i ++) {
+      text_evaluator.textContent += textString[i];
+      charCount++;
+      currentHeight = text_evaluator.getBoundingClientRect().height;
+  messageString += textString[i]
+      if (compareHeight != currentHeight) {
+  messageString += "  height increase  ";
+        heightIncreaseCount++;
+        compareHeight = currentHeight;
+        if (heightIncreaseCount == 10) {
+  messageString += "  break  ";
+          break;
+        }
+      }
+    }
+
+  console.log(messageString);
+  textarea.value += "mid crntHt : " + currentHeight;
+
+    */
+
+
+    /*
+    for (var i = 0; i < textString.length; i ++) {
+      text_evaluator.textContent += textString[i];
+      var height = text_evaluator.getBoundingClientRect().height;
+      if (compareHeight != height) {
+        textarea.value += "\n" + height + "    " + (i + 1);
+        break;
+      }
+    }
+    */
+  }
+
+  var targetFontSize = evaluateText();
+</script>
+</body>
+</html>

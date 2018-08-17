@@ -1,0 +1,55 @@
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="javascript/test_ruler.js"></script>
+<style>
+#box1 {
+  width:400px;
+  height:300px;
+  border-style: solid;
+  border-width: 2px;
+}
+canvas {
+    max-width: 100%;
+    max-height: 100%;
+}
+</style>
+<script src="javascript/html2canvas.min.js"></script>
+<script>
+  function genScreenshot() {
+    html2canvas(document.body, {
+      onrendered: function(canvas) {
+      var box1 = document.getElementById("box1");
+      box1.innerHTML = "";
+      box1.append(canvas);
+
+      if (navigator.userAgent.indexOf("MSIE ") > 0 ||
+          navigator.userAgent.match(/Trident.*rv\:11\./))
+      {
+        var blob = canvas.msToBlob();
+        window.navigator.msSaveBlob(blob,'Test file.png');
+      }
+      else {
+        document.getElementById("test").setAttribute("href", canvas.toDataURL("image/png"));
+        document.getElementById("test").setAttribute("download","Test file.png");
+        document.getElementById("test").click();
+      }
+
+
+      }
+    });
+  }
+</script>
+</head>
+<body>
+<a href="javascript:genScreenshot()"> Get Screenshot</a>
+<a id="test"></a>
+<div id="text">
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras in enim metus. Mauris lobortis non sem eu porta. Etiam ante lacus, viverra euismod neque ut, pretium volutpat lacus. Aenean ipsum elit, feugiat quis metus vitae, vehicula sodales </div>
+  <iframe id="viewport_iframe" src="index4.html" onload="onLoadIframe(this)" onscroll="console.log('iframe_scroll')"></iframe>
+<br>
+<div id="box1">
+</div>
+</body>
+</html>

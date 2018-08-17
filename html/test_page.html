@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script src="../javascript/remote.js"></script>
+<script>
+console.log("SCRIPT");
+
+  function init() {
+console.log("AH : init : ");
+    window.parent.currentURL = "http://waynebent.com";
+console.log("AH : init2 : " + window.parent.currentURL);
+
+    var href = rspdsg___normalizeHref("pdf/who_is.pdf");
+    console.log("HERE IT IS... " + href);
+  }
+  window.addEventListener("load", init);
+</script>
+<style>
+body {
+  margin: 20px;
+}
+#diagnostic_message_textarea {
+  width: 300px;
+  height: 250px;
+}
+</style>
+</head>
+<body>
+  <textarea id="diagnostic_message_textarea"></textarea>
+</body>
+</html>
