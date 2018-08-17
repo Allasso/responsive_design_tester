@@ -1,4 +1,6 @@
 ## Responsive Design Tester
+HTML website
+
 Tests responsive design layouts in viewer with selectable viewport sizes
 
 Allows the dev manipulation of viewports configurations to test responsive design pages to give an idea of its rendering.  Configurations can be changed manually or from a menu of configurations for common devices.
