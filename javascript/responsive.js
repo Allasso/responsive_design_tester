@@ -38,6 +38,7 @@ var widToPxWorkstation;
 var crntWidToPxDevice;
 var initialPhysSize = 4.5;
 var initialRulerSetting = 360;
+var cookieId = "rdt_"
 
 var _isNaN = Number.isNaN || isNaN;
 
@@ -74,8 +75,15 @@ function init() {
   var rectVP = viewport.getBoundingClientRect();
   inputWidth.value = rectVP.width;
   inputHeight.value = rectVP.height;
-  inputRulerAdjust.value = initialRulerSetting;
   widToPxWorkstation = 3 /initialRulerSetting;
+
+  var lastUrl = readCookie("lastUrl");
+  var lastRulerSetting = readCookie("lastRulerSetting");
+
+  inputUrl.value = lastUrl || "";
+  inputRulerAdjust.value = lastRulerSetting || initialRulerSetting;
+
+  setRuler();
 
   scaleStyleSheet = document.createElement('style');
   document.body.appendChild(scaleStyleSheet);
@@ -214,7 +222,6 @@ function getPhysicalSize(widPh, wid, ht) {
 }
 
 function setRuler(thumbwheel) {
-console.log("setRuler : " + thumbwheel);
   var rulerValue = parseInt(inputRulerAdjust.value);
 
   if (thumbwheel) {
@@ -375,7 +382,6 @@ function onInputDims(elem) {
 function onKeydown(evt, elem) {
   if (evt.keyCode == 13) {
     if (elem.id == "input_width" || elem.id == "input_height" || elem.id == "input_size_phys") {
-console.log("keydown : dims");
       onInputDims(elem);
       return;
     }
@@ -444,8 +450,31 @@ function setDynamicPositioning() {
   controlsRight.style.display = "block";
 }
 
-function scrollIframe(evt) {
-  viewport.contentWindow.scrollBy(0, 100);
+function readCookie(name) {
+  var cookieValue = 0
+  var nameEQ = cookieId + name+"=";
+  var cookieArray = document.cookie.split(';');
+  for (var i = 0; i < cookieArray.length; i++){
+    var cookieString = cookieArray[i];
+    var cookieString = cookieString.replace(/^ +/, '');
+    if (cookieString.indexOf(nameEQ) == 0){
+      cookieValue = cookieString.substring(nameEQ.length, cookieString.length);
+    }
+  }
+  return cookieValue;
+}
+
+function writeCookie(topic, value) {
+  var date = new Date();
+  date.setDate(date.getDate()+(90));
+  var expires = date.toGMTString();
+
+  document.cookie = cookieId + topic + "=" + value + "; expires="+expires+"; path=/";
+}
+
+function onBeforeunload(evt) {
+  writeCookie("lastUrl", inputUrl.value);
+  writeCookie("lastRulerSetting", inputRulerAdjust.value);
 }
 
 function onMouseEvent(evt) {
@@ -458,3 +487,4 @@ function onMouseEvent(evt) {
 }
 
 window.addEventListener("load", init);
+window.addEventListener("beforeunload", onBeforeunload);
