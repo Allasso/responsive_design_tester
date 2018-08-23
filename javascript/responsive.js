@@ -21,8 +21,23 @@ var ruler;
 var rulerTips;
 
 var controls_right;
+
 var checkboxSimple;
 var simpleTips;
+
+var checkboxSpoofMobile;
+var textareaUserAgent;
+var checkboxOverwriteUA;
+var injectUserAgentUI;
+
+var inputFontSize;
+var fontSizeTips;
+var checkboxFontSizeAncestor;
+
+var inputImageSize;
+var imageSizeTips;
+
+var messageUserAgent;
 
 var footer;
 var testprotocol;
@@ -63,14 +78,28 @@ function init() {
 
   footer = document.getElementById("footer");
 
-  controlsRight = document.getElementById("controls_right");
-  checkboxSimple = document.getElementById("checkbox_simple");
-
   inputRulerAdjust = document.getElementById("input_ruler_adjust");
   ruler = document.getElementById("ruler");
   rulerTips = document.getElementById("ruler_tips_container");
 
+  controlsRight = document.getElementById("controls_right");
+
+  checkboxSimple = document.getElementById("checkbox_simple");
   simpleTips = document.getElementById("simple_tips_container");
+
+  injectUserAgentUI = document.getElementById("inject_user_agent_ui_container");
+  checkboxSpoofMobile = document.getElementById("checkbox_spoof_mobile");
+  textareaUserAgent = document.getElementById("textarea_user_agent");
+  checkboxOverwriteUA = document.getElementById("checkbox_overwrite_ua");
+
+  inputFontSize = document.getElementById("input_font_size");
+  checkboxFontSizeAncestor = document.getElementById("checkbox_font_size_ancestor");
+  fontSizeTips = document.getElementById("font_size_tips_container");
+
+  inputImageSize = document.getElementById("input_image_size");
+  imageSizeTips = document.getElementById("image_size_tips_container");
+
+  messageUserAgent = document.getElementById("message_user_agent");
 
   var rectVP = viewport.getBoundingClientRect();
   inputWidth.value = rectVP.width;
@@ -78,9 +107,27 @@ function init() {
   widToPxWorkstation = 3 /initialRulerSetting;
 
   var lastUrl = readCookie("lastUrl");
+
+  var lastCheckboxSpoofMobileSetting = readCookie("lastCheckboxSpoofMobileSetting");
+  var lastCheckboxOverwriteUASetting = readCookie("lastCheckboxOverwriteUASetting");
+  var lastTextareaUserAgentSetting = readCookie("lastTextareaUserAgentSetting");
+
+  var lastInputFontSizeSetting = readCookie("lastInputFontSizeSetting");
+  var lastCheckboxFontSizeAncestorSetting = readCookie("lastCheckboxFontSizeAncestorSetting");
+  var lastInputImageSizeSetting = readCookie("lastInputImageSizeSetting");
+
   var lastRulerSetting = readCookie("lastRulerSetting");
 
   inputUrl.value = lastUrl || "";
+
+  checkboxSpoofMobile.checked = lastCheckboxSpoofMobileSetting == "checked" || false;
+  checkboxOverwriteUA.checked = lastCheckboxOverwriteUASetting == "checked" || false;
+  textareaUserAgent.value = lastTextareaUserAgentSetting || "";
+
+  inputFontSize.value = lastInputFontSizeSetting || "";
+  checkboxFontSizeAncestor.checked = lastCheckboxFontSizeAncestorSetting == "checked" || false;
+  inputImageSize.value = lastInputImageSizeSetting || "";
+
   inputRulerAdjust.value = lastRulerSetting || initialRulerSetting;
 
   setRuler();
@@ -98,7 +145,6 @@ function init() {
 
   document.body.addEventListener("mouseenter", onMouseEvent);
   document.body.addEventListener("mouseleave", onMouseEvent);
-  document.body.addEventListener("click", onMouseEvent);
   vpContainer.addEventListener("mouseenter", onMouseEvent);
   vpContainer.addEventListener("mouseleave", onMouseEvent);
 
@@ -268,6 +314,10 @@ function scaleRuler(value) {
 }
 
 function loadUrl(url) {
+  // Mainly for first time loadUrl after viewing welcome page, in the event that
+  // the user has not yet called this.
+  setViewportDims();
+
   if (url) {
     inputUrl.value = url
   } else {
@@ -289,8 +339,6 @@ function loadUrl(url) {
 
   var xhr = new XMLHttpRequest();
   xhr.open("POST", "http://kevinallasso.org/responsive/php/fetch_url.php?" + Date.now(), true);
-
-  //Send the proper header information along with the request
   xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
   xhr.onreadystatechange = function() {
@@ -304,7 +352,19 @@ function loadUrl(url) {
       }
     }
   }
-  xhr.send("fetch_url=" + url);
+
+  var params = "fetch_url=" + url;
+  if (checkboxSpoofMobile.checked) {
+    params += "&spoof_mobile=true";
+  }
+  if (checkboxOverwriteUA.checked) {
+    params += "&overwrite=true";
+  }
+  if (textareaUserAgent.value.trim()) {
+    params += "&ua_string=" + textareaUserAgent.value.trim() + "";
+  }
+
+  xhr.send(params);
 }
 
 function shadeFieldWithInvalidValues(elem) {
@@ -379,23 +439,6 @@ function onInputDims(elem) {
   }
 }
 
-function onKeydown(evt, elem) {
-  if (evt.keyCode == 13) {
-    if (elem.id == "input_width" || elem.id == "input_height" || elem.id == "input_size_phys") {
-      onInputDims(elem);
-      return;
-    }
-    if (elem.id == "input_url") {
-      loadUrl();
-      return;
-    }
-    if (elem.id == "input_ruler_adjust") {
-      setRuler();
-      return;
-    }
-  }
-}
-
 function onLoadIframe() {
   loadedDocuments.remote = true;
   onLoadAll();
@@ -411,21 +454,22 @@ function onLoadAll() {
   contentDocument = viewport.contentWindow.document;
 
   var styleElem = contentDocument.createElement("style");
-  //styleElem.innerHTML = "html { overflow: hidden; }\nhtml:hover { overflow: auto; }";
-  //styleElem.innerHTML = "html { overflow: hidden; }";
   contentDocument.body.appendChild(styleElem);
 
   var scriptElem = contentDocument.createElement("script");
   scriptElem.src = "../javascript/remote.js?" + Date.now();
   contentDocument.body.appendChild(scriptElem);
+
+  if (testprotocol.href.indexOf("rspdsgtestprotocolplaceholderhref") == -1) {
+    messageUserAgent.innerHTML = "navigator.userAgent:<br />" +
+      viewport.contentWindow.navigator.userAgent;
+  }
 }
 
 function onWheel(evt) {
   if (evt.currentTarget != viewport.contentWindow) {
     return;
   }
-  //viewport.contentWindow.scrollBy(evt.deltaX, evt.deltaY);
-  //window.scrollBy(0, -10);
 }
 
 function onDeviceSelect(select) {
@@ -448,6 +492,152 @@ function setDynamicPositioning() {
   var left = rect.width + 15;
   controlsRight.style.left = left + "px";
   controlsRight.style.display = "block";
+}
+
+function setFontSize() {
+  if (!viewport.contentWindow) {
+    return;
+  }
+
+  var fontSize = parseFloat(inputFontSize.value);
+  fontSize = Math.round(inputFontSize.value * 10) / 10;
+
+  var selection = viewport.contentWindow.getSelection();
+
+  // Probably nothing is selected.
+  if (!selection.rangeCount) {
+    return;
+  }
+
+  var range = selection.getRangeAt(0);
+  selection.removeAllRanges();
+
+  // Clean up any standing font modification.
+  var changedNodes =
+    viewport.contentWindow.document.getElementsByClassName("rspdsg___font_shift");
+  var len = changedNodes.length;
+  for (var i = 0; i < len; i++) {
+    var node = changedNodes[0];
+    var textNode = node.firstChild;
+    var parent = node.parentNode;
+    parent.insertBefore(textNode, node);
+    parent.removeChild(node);
+  }
+
+  if (checkboxFontSizeAncestor.checked) {
+    var node = range.commonAncestorContainer;
+    if (node.nodeType != node.ELEMENT_NODE) {
+      node = node.parentNode;
+    }
+    var nodeILStyle = node.getAttribute("style");
+    var addedStyle = "font-size: " + fontSize + "px !important";
+    var newILStyle = nodeILStyle ? nodeILStyle + "; " + addedStyle : addedStyle;
+    node.setAttribute("style", newILStyle);
+  } else {
+    setFontSizeSelectedText(range, fontSize);
+  }
+}
+
+function setFontSizeSelectedText(range, fontSize) {
+  // Get the offset counting from the end backwards.
+  var endEndset = range.endContainer.textContent.length - range.endOffset;
+
+  var filter = { acceptNode: function() {
+    return NodeFilter.FILTER_ACCEPT;
+  }};
+
+  // Ugly IE hack.  A true W3C-compliant nodeFilter object isn't passed,
+  // and instead a "safe" one _based_ off of the real one.
+  // Taken from SO.
+  var safeFilter = filter.acceptNode;
+  safeFilter.acceptNode = filter.acceptNode;
+
+  var treeWalker = document.createTreeWalker(
+    viewport.contentWindow.document.body,
+    NodeFilter.SHOW_ALL,
+    safeFilter,
+    false
+  );
+
+  /*
+  // This is how it should be...
+  var treeWalker = document.createTreeWalker(
+    viewport.contentWindow.document.body,
+    NodeFilter.SHOW_ALL,
+    { acceptNode: function(node) { return NodeFilter.FILTER_ACCEPT; } },
+    false
+  );
+  */
+
+  var nodeList = [];
+  var recordNodes = false;
+
+  while(treeWalker.nextNode()) {
+    var node = treeWalker.currentNode;
+
+    if (node == range.startContainer) {
+      recordNodes = true;
+    }
+    if (recordNodes && node.nodeType == node.TEXT_NODE) {
+      nodeList.push(node);
+    }
+    if (node == range.endContainer) {
+      recordNodes = false;
+      break;
+    }
+  }
+
+  if (!nodeList.length) {
+    return;
+  }
+
+  var startEndDiffer = nodeList.length > 1;
+  if (range.startOffset > 0) {
+    var firstNode = nodeList.shift();
+    var seg2 = firstNode.splitText(range.startOffset);
+    nodeList.unshift(seg2);
+  }
+  if (endEndset > 0) {
+    var lastNode = nodeList.pop();
+    var offset = lastNode.textContent.length - endEndset;
+    lastNode.splitText(offset);
+    nodeList.push(lastNode);
+  }
+  for (var i = 0; i < nodeList.length; i++) {
+    var node = nodeList[i];
+    var span = document.createElement("span");
+    span.className = "rspdsg___font_shift";
+    span.style.fontSize = fontSize + "px";
+    node.parentNode.insertBefore(span, node);
+    span.appendChild(node);
+  }
+}
+
+function setImageSize() {
+  if (!viewport.contentWindow) {
+    return;
+  }
+
+  var imageSizeArr = inputImageSize.value.split(/[^0-9]+/);
+
+  var selection = viewport.contentWindow.getSelection();
+
+  // Probably nothing is selected.
+  if (!selection.rangeCount) {
+    return;
+  }
+
+  var range = selection.getRangeAt(0);
+
+  var node = range.commonAncestorContainer;
+  if (node.localName != "img") {
+    var node = node.getElementsByTagName("img")[0];
+  }
+
+  var nodeILStyle = node.getAttribute("style");
+  var addedStyle = "width: " + imageSizeArr[0] + "px !important; height: " + imageSizeArr[1] + "px !important";
+  var newILStyle = nodeILStyle ? nodeILStyle + "; " + addedStyle : addedStyle;
+  node.setAttribute("style", newILStyle);
 }
 
 function readCookie(name) {
@@ -474,7 +664,15 @@ function writeCookie(topic, value) {
 
 function onBeforeunload(evt) {
   writeCookie("lastUrl", inputUrl.value);
+
+  writeCookie("lastCheckboxSpoofMobileSetting", checkboxSpoofMobile.checked ? "checked" : "");
+  writeCookie("lastCheckboxOverwriteUASetting", checkboxOverwriteUA.checked ? "checked" : "");
+  writeCookie("lastTextareaUserAgentSetting", textareaUserAgent.value);
+
   writeCookie("lastRulerSetting", inputRulerAdjust.value);
+  writeCookie("lastInputFontSizeSetting", inputFontSize.value);
+  writeCookie("lastCheckboxFontSizeAncestorSetting", checkboxFontSizeAncestor.checked ? "checked" : "");
+  writeCookie("lastInputImageSizeSetting", inputImageSize.value);
 }
 
 function onMouseEvent(evt) {
@@ -486,5 +684,31 @@ function onMouseEvent(evt) {
   }
 }
 
+function onKeydown(evt, elem) {
+  if (evt.keyCode == 13) {
+    if (elem.id == "input_width" || elem.id == "input_height" || elem.id == "input_size_phys") {
+      onInputDims(elem);
+      return;
+    }
+    if (elem.id == "input_url") {
+      loadUrl();
+      return;
+    }
+    if (elem.id == "input_ruler_adjust") {
+      setRuler();
+      return;
+    }
+    if (elem.id == "input_font_size") {
+      setFontSize();
+      return;
+    }
+    if (elem.id == "input_image_size") {
+      setImageSize();
+      return;
+    }
+  }
+}
+
 window.addEventListener("load", init);
 window.addEventListener("beforeunload", onBeforeunload);
+window.addEventListener("click", onMouseEvent, true);

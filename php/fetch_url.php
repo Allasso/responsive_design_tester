@@ -89,12 +89,31 @@
     $has_html = strpos($text, "<html") !== false;
 
     $regex = "";
-    $replacement = "\n<script>\n" .
-                   "console.log(\"UA in : \" + navigator.userAgent);\n" .
-                   "var rspdsg___userAgentMod = navigator.userAgent + \" mobile\";\n" .
-                   "navigator.__defineGetter__(\"userAgent\", function(){ return rspdsg___userAgentMod; });\n" .
-                   "console.log(\"UA in : \" + navigator.userAgent);\n" .
-                   "</script>\n";
+    $replacement = "\n<script>\n";
+
+//$replacement .= "console.log(\"UA in  : \" + navigator.userAgent);\n";
+
+    $replacement .= "var rspdsg___userAgentMod = \"\"\n";
+
+    if (!isset($_POST["overwrite"])) {
+      $replacement .= "rspdsg___userAgentMod += navigator.userAgent;\n";
+    }
+    if (isset($_POST["spoof_mobile"])) {
+      $replacement .= "rspdsg___userAgentMod += \" mobile\";\n";
+    }
+    if (isset($_POST["ua_string"])) {
+      $replacement .= "rspdsg___userAgentMod += \" " . $_POST["ua_string"] . "\";\n";
+    }
+
+    $replacement .= "Object.defineProperty(navigator, \"userAgent\", {\n";
+    $replacement .=   "get: function() {\n";
+    $replacement .=     "return rspdsg___userAgentMod;\n";
+    $replacement .=   "}\n";
+    $replacement .= "});\n";
+
+//$replacement .= "console.log(\"UA out : \" + navigator.userAgent);\n;";
+
+    $replacement .= "</script>\n";
 
     if ($has_head) {
       $regex = '/(<head[^<>]*>)/';
@@ -119,7 +138,7 @@
 
   $contents = file_get_contents($currentURL);
   $contents = fixLinks($contents, $currentURL);
-  if (isset($_POST["spoof_mobile"])) {
+  if (isset($_POST["spoof_mobile"]) || isset($_POST["ua_string"])) {
     $contents = insertScript($contents);
   }
 

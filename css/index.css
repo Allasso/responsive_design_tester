@@ -1,0 +1,282 @@
+body {
+  margin: 5px 25px 0 75px;
+  font-size: 16px;
+  font-family: verdana;
+  background-color: #ddd;
+}
+#vp_section_container {
+  position: relative;
+  height: 2px;
+  width: 2px;
+  z-index: 1000;
+}
+#vp_container {
+  position: absolute;
+
+  /* Nominal start position when using device frame
+  top: 95px;
+  left: 22px;
+  */
+
+  top: 0;
+  left: 0;
+  height: 480px;
+  width: 320px;
+  /* box-shadow: inset -1px -1px cyan, inset 1px 1px cyan; */
+  /* opacity: .5; */
+  z-index: 1002;
+  background-color: #7b7d7d;
+  border: 10px solid #7b7d7d;
+  border-radius: 10px;
+}
+#viewport_iframe {
+  position: relative;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #fff;
+  border: none;
+  /* opacity: 0; */
+  z-index: 1003;
+  border-radius: 5px;
+}
+.device_frame {
+  position: absolute;
+  display: none;
+  z-index: 1001;
+}
+#device_top {
+  top: 0;
+  left: 0;
+  width: 363px;
+  height: 102px;
+}
+#device_sides {
+  top: 95px;
+  left: 0;
+  width: 363px;
+  height: 480px;
+}
+#device_bot {
+  top: 568px;
+  left: 0;
+  width: 363px;
+  height: 105px;
+}
+#device_led {
+  top: ;
+  left: ;
+  width: ;
+  height: ;
+}
+#device_mic {
+  top: ;
+  left: ;
+  width: ;
+  height: ;
+}
+#device_but {
+  top: ;
+  left: ;
+  width: ;
+  height: ;
+}
+
+/* Controls styles */
+
+.input_dims {
+  width: 35px;
+  border: 1px solid #bbb;
+  border-radius: 3px;
+  padding-left: 5px;
+}
+.controls_item {
+  float: left;
+  margin-right: 6px;
+  margin-left: 0;
+}
+.controls_item_checkbox {
+  float: left;
+  margin-right: 2px;
+  margin-left: 0;
+}
+.controls_spacer_inline {
+  float: left;
+  width: 6px;
+  height: 5px;
+}
+
+/* Controls container 1 */
+
+#controls_container_1 {
+  margin: 0 0 10px 0;
+  font-size: 12px;
+  min-width: 850px;
+  clear: both;
+}
+
+/* Controls container 2 */
+
+#controls_container_2 {
+  width: 100%;
+  height: 30px;
+  font-size: 12px;
+  min-width: 850px;
+  clear: both;
+}
+#select_device {
+  width: 150px;
+  margin-left: 20px;
+}
+#input_url {
+  width: 250px;
+}
+#inject_user_agent_ui_container {
+  top: 23px;
+  width: 400px;
+}
+#inject_user_agent_ui_container > input, span {
+  margin-left: 20px;
+}
+#inject_user_agent_ui_container > textarea {
+  margin: 0 20px;
+  width: 320px;
+  height: 40px;
+}
+
+/* Controls Right */
+
+#controls_right {
+  position: relative;
+  font-size: 13px;
+  left: 0;
+  top: 50px;
+  display: none;
+}
+.controls_right_break {
+  width: 100%;
+  clear: both;
+  height: 17px;
+}
+#ruler {
+  height: 24px;
+  background-color: cyan;
+  font-size: 14px;
+  font-family: monospace;
+  box-shadow: inset -1px 0 black, inset 1px 0 black;
+}
+#input_ruler_adjust {
+  margin-right: 2px !important;
+}
+#container_ruler_adjust_thumbwheel {
+  width: 10px;
+  margin-right: 8px !important;
+}
+#ruler_adjust_thumbwheel_up {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 7px solid red;
+  margin: 1px 0 3px 0;
+}
+#ruler_adjust_thumbwheel_down {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 7px solid red;
+}
+#input_font_size {
+  margin-right: 0;
+}
+#button_font_size {
+  padding-left: 2px;
+  padding-right: 2px;
+}
+#input_image_size {
+  margin-right: 0;
+  width: 60px;
+}
+#button_image_size {
+  padding-left: 2px;
+  padding-right: 2px;
+}
+#message_user_agent {
+  width: 300px;
+}
+
+/* Tips styles */
+
+#dims_tips_outer_container {
+  margin: 0 15px 0 0;
+  float: left;
+  margin-right: 6px;
+}
+#dims_tips_container {
+  width: 480px;
+  top: 22px;
+}
+#simple_tips_container {
+  top: 23px;
+  width: 360px;
+}
+#ruler_tips_container {
+  top: 30px;
+  width: 400px;
+}
+#font_size_tips_container {
+  top: 23px;
+  width: 400px;
+}
+#image_size_tips_container {
+  top: 23px;
+  width: 400px;
+}
+.tips_button {
+  padding: 1px 3px 0 3px;
+  font-weight: bold;
+  margin: 0 !important;
+  background-color:  #fff59d;
+}
+.tips_outer_container {
+  position: relative;
+  height: 25px;
+}
+.tips_container {
+  position: absolute;
+  right: 0;
+  margin: 0;
+  padding: 0 0 15px 0;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+  background-color: #ddd;
+  display: none;
+  z-index: 2000;
+}
+.tips_container > h1 {
+  margin: 16px auto 5px auto;
+  text-align: center;
+  font-size: 13px;
+  font-weight: bold;
+}
+.tips_container > div {
+  font-size: 13px;
+  margin: 10px 20px;
+}
+.tips_closebutton {
+  font-size: 10px !important;
+  cursor: default;
+  user-select: none;
+  float: right;
+  margin: 2px 7px 0 0 !important;
+  padding: 0;
+}
+.tips_param {
+  background-color: #eee;
+  padding: 0 3px;
+  border-radius: 3px;
+  float: none !important;
+  margin: 0 !important;
+}

@@ -18,7 +18,7 @@ function rspdsg___init() {
 
   // If href is placeholder, we are on the start page, or if simpleload: don't
   // do anything more.
-  if (rspdsg___currentURL.indexOf("testprotocolplaceholderhref") > -1 ||
+  if (rspdsg___currentURL.indexOf("rspdsgtestprotocolplaceholderhref") > -1 ||
       window.parent.simpleLoad) {
     return;
   }
