@@ -5,7 +5,7 @@ Tests responsive design layouts in viewer with selectable viewport sizes
 
 Allows the dev manipulation of viewports configurations to test responsive design pages to give an idea of its rendering.  Configurations can be changed manually or from a menu of configurations for common devices.  Offers other features as well:
 
-* Actual screen to viewport calibration using visual ruler (This is preferred in place of asking user's screen size, as advertised screen sizes do not always reflect actuality)
+* Actual screen to viewport calibration using visual ruler (This is preferred in place of asking user's screen size, as that method is prone to error)
 * Modify or replace navigator.userAgent string (Affects JS only)
 * Change font size of selected text within the viewer
 * Change image size of selected image within the viewer
